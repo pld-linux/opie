@@ -21,6 +21,14 @@
  AC_CHECK_FUNC(atexit,      AC_DEFINE(HAVE_ATEXIT),      MISSING="${MISSING}atexit.o "; AC_CHECK_FUNCS(on_exit))
 --- opie-2.4/configure.in.orig	Sat Jan 11 02:51:26 2003
 +++ opie-2.4/configure.in	Sat Jan 11 02:54:07 2003
+@@ -146,6 +146,7 @@
+ 	done
+ 	IFS=" "
+ done
++IFS="$save_IFS"
+ AC_DEFINE_UNQUOTED(DEFAULT_PATH, "$default_path")
+ AC_MSG_RESULT($default_path)
+ 
 @@ -515,26 +515,26 @@
  MISSING="$LIB@&t@OBJS $ALLOCA " ;
  
