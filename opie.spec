@@ -53,13 +53,13 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
-make DEBUG="$RPM_OPT_FLAGS" KEY_FILE=%{_sysconfdir}/opie/keys
+%{__make} DEBUG="$RPM_OPT_FLAGS" KEY_FILE=%{_sysconfdir}/opie/keys
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/opie,%{_sbindir},%{_libdir},%{_includedir}/security,/var/lib}
 
-make install KEY_FILE=%{_sysconfdir}/opie/keys DESTDIR=$RPM_BUILD_ROOT
+%{__make} install KEY_FILE=%{_sysconfdir}/opie/keys DESTDIR=$RPM_BUILD_ROOT
 
 install opie.h $RPM_BUILD_ROOT%{_includedir}/security
 
