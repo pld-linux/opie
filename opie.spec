@@ -11,6 +11,7 @@ Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-ttyname.patch
 Patch2:		%{name}-bison.patch
 Patch3:		%{name}-acfix.patch
+Patch4:		%{name}-errno.patch
 URL:		http://inner.net/opie
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
@@ -78,6 +79,7 @@ Statyczne biblioteki OPIE.
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__autoconf}
