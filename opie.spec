@@ -1,7 +1,7 @@
 Summary:	OPIE suite of programs
 Name:		opie
 Version:	2.32
-Release:	4
+Release:	5
 License:	NRL/TIN
 Group:		Libraries
 Group(de):	Libraries
@@ -12,6 +12,7 @@ Patch0:		%{name}-shared.patch
 Patch1:		%{name}-install.patch
 Patch2:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 BuildRequires:	autoconf
+BuildRequires:	byacc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
