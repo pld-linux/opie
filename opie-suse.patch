@@ -1,0 +1,102 @@
+--- opie-2.4/libopie/readpass.c
++++ opie-2.4/libopie/readpass.c
+@@ -14,6 +14,8 @@
+ 
+         History:
+ 
++	Modified opiereadpass() and fixing off by one. S-
++
+ 	Modified by cmetz for OPIE 2.31. Use usleep() to delay after setting
+ 		the terminal attributes; this might help certain buggy
+ 		systems.
+@@ -81,6 +83,9 @@
+   char kill[4];
+   char eof[4];
+ 
++  if (len < 2) /* AUDIT: useless otherwise */
++	return NULL;
++
+   memset(erase, 0, sizeof(erase));
+   memset(kill, 0, sizeof(kill));
+   memset(eof, 0, sizeof(eof));
+@@ -217,7 +222,8 @@
+ #endif /* unix */
+ 
+   {
+-  char *c = buf, *end = buf + len, *e;
++  char *c = buf, *end = buf + len-1, *e;/* AUDIT: fixing off by one */
++
+ #ifdef __OS2__
+   KBDKEYINFO keyInfo;
+ #endif /* __OS2__ */
+--- opie-2.4/libopie/readrec.c
++++ opie-2.4/libopie/readrec.c
+@@ -8,6 +8,7 @@
+ 
+ 	History:
+ 
++	Replaced strcpy() S-
+ 	Modified by cmetz for OPIE 2.4. Check that seed, sequence number, and
+ 		response values are valid.
+ 	Modified by cmetz for OPIE 2.31. Removed active attack protection
+@@ -142,7 +143,7 @@
+     if (strlen(opie->opie_principal) > OPIE_PRINCIPAL_MAX)
+       (opie->opie_principal)[OPIE_PRINCIPAL_MAX] = 0;
+     
+-    strcpy(principal, opie->opie_principal);
++    snprintf(principal,sizeof(principal),"%s",opie->opie_principal);/* AUDIT: replaced strcpy()*/
+     
+     do {
+       if ((opie->opie_recstart = ftell(f)) < 0)
+--- opie-2.4/opieinfo.c
++++ opie-2.4/opieinfo.c
+@@ -33,6 +33,7 @@
+ 
+ #include "opie_cfg.h"
+ #include <stdio.h>
++#include <errno.h>
+ #if HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif /* HAVE_UNISTD_H */
+--- opie-2.4/opiepasswd.c
++++ opie-2.4/opiepasswd.c
+@@ -14,6 +14,8 @@
+ 
+ 	History:
+ 
++	Replaced strcpy() S-
++
+ 	Modified by cmetz for OPIE 2.4. Use struct opie_key for key blocks.
+ 		Use opiestrncpy().
+ 	Modified by cmetz for OPIE 2.32. Use OPIE_SEED_MAX instead of
+@@ -207,7 +209,7 @@
+     }
+   } else {
+     if (!rval)
+-      strcpy(seed, opie.opie_seed);
++      snprintf(seed, sizeof(seed), "%s", opie.opie_seed);/* AUDIT: replaced strcpy() */
+ 
+     if (opienewseed(seed) < 0) {
+       fprintf(stderr, "Error updating seed.\n");
+--- opie-2.4/opiesu.c
++++ opie-2.4/opiesu.c
+@@ -201,7 +201,7 @@
+     for (cp = ename; *cp == *dp && *cp; cp++, dp++)
+       continue;
+     if (*cp == 0 && (*dp == '=' || *dp == 0)) {
+-      strcat(buf, eval);
++      snprintf(buf, sizeof(buf), "%s%s",buf,  eval); /* XXX: what to do? */
+       *--ep = buf;
+       return;
+     }
+@@ -469,8 +469,8 @@
+   }
+   if (thisuser.pw_shell && *thisuser.pw_shell)
+     shell = thisuser.pw_shell;
+-  if (fulllogin) {
+-    if ((p = getenv("TERM")) && (strlen(termbuf) + strlen(p) - 1 < sizeof(termbuf))) {
++  if (fulllogin) {			/* AUDIT: why -1? */
++    if ((p = getenv("TERM")) && (strlen(termbuf) + strlen(p) < sizeof(termbuf))) {
+       strcat(termbuf, p);
+       cleanenv[4] = termbuf;
+     }
