@@ -2,16 +2,17 @@ Summary:	OPIE suite of programs
 Summary(pl):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	1
+Release:	2
 Epoch:		1
 License:	NRL/TIN
-Group:		Libraries
+Group:		Applications/System
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
+URL:		http://inner.net/opie
 #BuildRequires:	autoconf
 #BuildRequires:	automake
 BuildRequires:	bison
-URL:		http://inner.net/opie
+Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,17 +34,29 @@ jednorazowych. Powinien on byæ odporny na popularne w Internecie ataki
 pasywne (zobacz RFC 1704). Jest on podatny na ataki s³ownikowe, które
 nie s± aktualnie szeroko rozpowszechnione.
 
+%package libs
+Summary:	OPIE shared libraries
+Summary(pl):	Biblioteki wspó³dzielone OPIE
+Group:		Libraries
+Conflicts:	%{name} < 2.4-2
+
+%description libs
+OPIE (One-Time Password System) shared libraries.
+
+%description libs -l pl
+Biblioteki wspó³dzielone OPIE (systemu hase³ jednorazowych).
+
 %package devel
-Summary:	Libraries and headers for developing OPIE enabled programs
-Summary(pl):	Biblioteki i nag³ówki konieczne do tworzenia programów z obs³ug± OPIE
+Summary:	Headers for developing OPIE enabled programs
+Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
 
 %description devel
-Libraries and headers for developing OPIE enabled programs.
+Headers for developing OPIE enabled programs.
 
 %description devel -l pl
-Biblioteki i nag³ówki konieczne do tworzenia programów z obs³ug± OPIE.
+Pliki nag³ówkowe potrzebne do tworzenia programów z obs³ug± OPIE.
 
 %package static
 Summary:	OPIE static libraries
@@ -84,12 +97,11 @@ gzip -9nf BUG-REPORT README COPYRIGHT.NRL License.TIN
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
 %attr(0755,root,root) %{_bindir}/opieinfo
 %attr(0755,root,root) %{_bindir}/opiekey
 %attr(0755,root,root) %{_bindir}/otp-*
@@ -97,17 +109,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(4755,root,root) %{_sbindir}/opiesu
 %attr(4755,root,root) %{_sbindir}/opielogin
 %attr(0750,root,root) %{_sbindir}/opieftpd
-%attr(0755,root,root) %{_libdir}/lib*.so.*.*
-%attr(444,root,root) %{_sysconfdir}/opie/keys
 %dir %attr(700,root,root) /var/lib/opie
-%dir %{_sysconfdir}/opie
 %{_mandir}/man*/*
+
+%files libs
+%defattr(644,root,root,755)
+%doc *.gz
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%dir %{_sysconfdir}/opie
+%attr(444,root,root) %{_sysconfdir}/opie/keys
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/security/opie.h
 %attr(755,root,root) %{_libdir}/lib*.so
+%{_includedir}/security/opie.h
 
 %files static
 %defattr(644,root,root,755)
-%attr(644,root,root) %{_libdir}/lib*.a
+%{_libdir}/lib*.a
