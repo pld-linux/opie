@@ -14,12 +14,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 The OPIE suite of programs.
 
-OPIE is an implementation of the One-Time Password (OTP) System that is
-being considered for the Internet standards-track. OPIE provides a one-time
-password system. The system should be secure against the passive attacks
-now commonplace on the Internet (see RFC 1704 for more details). The system
-is vulnerable to active dictionary attacks, though these are not widespread
-at present and can be detected through proper use of system audit software.
+OPIE is an implementation of the One-Time Password (OTP) System that
+is being considered for the Internet standards-track. OPIE provides a
+one-time password system. The system should be secure against the
+passive attacks now commonplace on the Internet (see RFC 1704 for more
+details). The system is vulnerable to active dictionary attacks,
+though these are not widespread at present and can be detected through
+proper use of system audit software.
 
 %package devel
 Summary:	libraries and headers for developing OPIE enabled programs
