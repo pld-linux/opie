@@ -2,7 +2,7 @@ Summary:	OPIE suite of programs
 Summary(pl):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	8
+Release:	9
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
@@ -15,7 +15,7 @@ Patch3:		%{name}-acfix.patch
 Patch4:		%{name}-errno.patch
 Patch5:		%{name}-suse.patch
 Patch6:		%{name}-uint4.patch
-URL:		http://inner.net/opie/
+URL:		http://inner.net/opie
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
 Requires:	%{name}-libs = %{epoch}:%{version}
@@ -91,7 +91,8 @@ Statyczne biblioteki OPIE.
 %{__autoconf}
 %configure \
 	--enable-access-file=%{_sysconfdir}/opie/access \
-	--enable-user-locking=/var/lib/opie
+	--enable-user-locking=/var/lib/opie \
+	--enable-insecure-override
 
 %{__make} DEBUG="%{rpmcflags} " \
 	KEY_FILE=%{_sysconfdir}/opie/keys
@@ -129,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUG-REPORT README COPYRIGHT.NRL License.TIN
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_sysconfdir}/opie
-%attr(444,root,root) %{_sysconfdir}/opie/keys
+%config(noreplace) %verify(not size mtime md5) %attr(644,root,root) %{_sysconfdir}/opie/keys
 
 %files devel
 %defattr(644,root,root,755)
