@@ -1,18 +1,17 @@
 Summary:	OPIE suite of programs
+Summary(pl):	Zestaw programów do OPIE
 Name:		opie
-Version:	2.32
-Release:	7
+Version:	2.4
+Release:	1
 License:	NRL/TIN
 Group:		Libraries
 Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
-Patch0:		%{name}-shared.patch
-Patch1:		%{name}-install.patch
-Patch2:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-BuildRequires:	autoconf
-BuildRequires:	automake
+Patch0:		%{name}-makefile.patch
+#BuildRequires:	autoconf
+#BuildRequires:	automake
 BuildRequires:	byacc
 URL:		http://inner.net/opie
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,8 +27,17 @@ details). The system is vulnerable to active dictionary attacks,
 though these are not widespread at present and can be detected through
 proper use of system audit software.
 
+%description -l pl
+Zestaw programów do OPIE.
+
+OPIE jest implementacj± One-Time Password (OTP) System - systemu hase³
+jednorazowych. Powinien on byæ odporny na popularne w Internecie ataki
+pasywne (zobacz RFC 1704). Jest on podatny na ataki s³ownikowe, które
+nie s± szeroko aktualnie rozpowszechniony. 
+
 %package devel
-Summary:	libraries and headers for developing OPIE enabled programs
+Summary:	Libraries and headers for developing OPIE enabled programs
+Summary(pl):	Biblioteki i nag³ówki konieczne do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
@@ -39,8 +47,12 @@ Requires:	%{name} = %{version}
 %description devel
 Libraries and headers for developing OPIE enabled programs.
 
+%description -l pl devel
+Biblioteki i nag³ówki konieczne do tworzenia programów z obs³ug± OPIE
+
 %package static
-Summary:	OPIE staic libraries
+Summary:	OPIE static libraries
+Summary(pl):	Statyczne biblioteki OPIE
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
@@ -50,16 +62,15 @@ Requires:	%{name}-devel = %{version}
 %description static
 OPIE staic libraries.
 
+%description -l pl static
+Statyczne biblioteki OPIE.
+
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
-aclocal
-autoconf
-%configure \
+%configure2_13 \
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
@@ -86,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {BUG-REPORT,README,COPYRIGHT.NRL,License.TIN}.gz
+%doc *.gz
 %attr(0755,root,root) %{_bindir}/opieinfo
 %attr(0755,root,root) %{_bindir}/opiekey
 %attr(0755,root,root) %{_bindir}/otp-*
@@ -95,13 +106,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(4755,root,root) %{_sbindir}/opielogin
 %attr(0750,root,root) %{_sbindir}/opieftpd
 %attr(0755,root,root) %{_libdir}/lib*.so.*.*
+%attr(444,root,root) %{_sysconfdir}/opie/keys
 %dir %attr(700,root,root) /var/lib/opie
 %dir %{_sysconfdir}/opie
-%attr(444,root,root) %{_sysconfdir}/opie/keys
-%{_mandir}/man1/*
-%{_mandir}/man4/*
-%{_mandir}/man5/*
-%{_mandir}/man8/*
+%{_mandir}/man*/*
 
 %files devel
 %defattr(644,root,root,755)
