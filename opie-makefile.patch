@@ -16,7 +16,7 @@
  	@RANLIB@ $(TARGET)
  
 +$(TARGETS): $(OBJS)
-+	ld -o $(TARGETS).$(MAJOR).$(MINOR) -soname $(TARGETS).$(MAJOR) -shared $(OBJS)
++	$(CC) -o $(TARGETS).$(MAJOR).$(MINOR) -Wl,-soname=$(TARGETS).$(MAJOR) -shared $(OBJS)
 +	ln -s $(TARGETS).$(MAJOR).$(MINOR) $(TARGETS)
 +
 +install: $(TARGET) $(TARGETS)
