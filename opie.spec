@@ -1,7 +1,7 @@
 Summary:	OPIE suite of programs
 Name:		opie
 Version:	2.32
-Release:	5
+Release:	6
 License:	NRL/TIN
 Group:		Libraries
 Group(de):	Libraries
