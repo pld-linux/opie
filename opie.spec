@@ -42,7 +42,7 @@ Requires:	%{name} = %{version}
 %description devel
 Libraries and headers for developing OPIE enabled programs.
 
-%description -l pl devel
+%description devel -l pl
 Biblioteki i nag³ówki konieczne do tworzenia programów z obs³ug± OPIE.
 
 %package static
@@ -54,7 +54,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 OPIE staic libraries.
 
-%description -l pl static
+%description static -l pl
 Statyczne biblioteki OPIE.
 
 %prep
