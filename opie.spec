@@ -7,7 +7,7 @@ Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5: d46e0ff8cc721a287892192dc4e7b7e1
+# Source0-md5:	d46e0ff8cc721a287892192dc4e7b7e1
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-ttyname.patch
 Patch2:		%{name}-bison.patch
