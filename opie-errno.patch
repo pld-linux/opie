@@ -1,0 +1,11 @@
+diff -Nru opie-2.4.orig/opieinfo.c opie-2.4/opieinfo.c
+--- opie-2.4.orig/opieinfo.c	Thu Mar 11 02:09:53 1999
++++ opie-2.4/opieinfo.c	Wed Mar  5 21:04:56 2003
+@@ -32,6 +32,7 @@
+ */
+ 
+ #include "opie_cfg.h"
++#include <errno.h>
+ #include <stdio.h>
+ #if HAVE_UNISTD_H
+ #include <unistd.h>
