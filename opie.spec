@@ -1,14 +1,16 @@
 Summary:	OPIE suite of programs
 Name:		opie
 Version:	2.32
-Release:	2
-Copyright:	NRL/TIN
+Release:	3
+License:	NRL/TIN
 Group:		Libraries
-Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(fr):	Librairies
 Source0:	%{name}-%{version}.tar.gz
-Patch0:		opie-shared.patch
-Patch1:		opie-install.patch
+Patch0:		%{name}-shared.patch
+Patch1:		%{name}-install.patch
+Patch2:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,8 +27,8 @@ proper use of system audit software.
 %package devel
 Summary:	libraries and headers for developing OPIE enabled programs
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(fr):	Development/Librairies
 Requires:	%{name} = %{version}
 
 %description devel
@@ -35,8 +37,8 @@ Libraries and headers for developing OPIE enabled programs.
 %package static
 Summary:	OPIE staic libraries
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(fr):	Development/Librairies
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -46,8 +48,10 @@ OPIE staic libraries.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
+autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-access-file=%{_sysconfdir}/opie/access \
