@@ -16,7 +16,7 @@ Patch4:		%{name}-errno.patch
 URL:		http://inner.net/opie
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,7 +54,7 @@ Biblioteki wspó³dzielone OPIE (systemu hase³ jednorazowych).
 Summary:	Headers for developing OPIE enabled programs
 Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 
 %description devel
 Headers for developing OPIE enabled programs.
@@ -66,7 +66,7 @@ Pliki nag³ówkowe potrzebne do tworzenia programów z obs³ug± OPIE.
 Summary:	OPIE static libraries
 Summary(pl):	Statyczne biblioteki OPIE
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 OPIE staic libraries.
