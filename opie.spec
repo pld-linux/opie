@@ -92,8 +92,6 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/opie,%{_sbindir},%{_libdir},%{_include
 
 install opie.h $RPM_BUILD_ROOT%{_includedir}/security
 
-gzip -9nf BUG-REPORT README COPYRIGHT.NRL License.TIN
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -114,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc *.gz
+%doc BUG-REPORT README COPYRIGHT.NRL License.TIN
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_sysconfdir}/opie
 %attr(444,root,root) %{_sysconfdir}/opie/keys
