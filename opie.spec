@@ -1,18 +1,18 @@
 Summary:	OPIE suite of programs
 Name:		opie
 Version:	2.32
-Release:	6
+Release:	7
 License:	NRL/TIN
 Group:		Libraries
 Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	%{name}-%{version}.tar.gz
+Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-install.patch
 Patch2:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-BuildRequires:	autoconf
 BuildRequires:	byacc
+URL:		http://inner.net/opie
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,8 +55,7 @@ OPIE staic libraries.
 %patch2 -p1
 
 %build
-autoconf
-%configure \
+%configure2_13 \
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
