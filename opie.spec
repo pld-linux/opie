@@ -8,6 +8,7 @@ License:	NRL/TIN
 Group:		Applications/System
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-ttyname.patch
 URL:		http://inner.net/opie
 #BuildRequires:	autoconf
 #BuildRequires:	automake
@@ -73,6 +74,7 @@ Statyczne biblioteki OPIE.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 %build
 %configure2_13 \

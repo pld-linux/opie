@@ -1,0 +1,16 @@
+--- libopie/insecure.c~	Thu Mar 11 02:09:57 1999
++++ libopie/insecure.c	Thu Dec 26 16:43:58 2002
+@@ -123,7 +123,12 @@
+   if (isatty(0)) {
+     memset(&utmp, 0, sizeof(struct utmp));
+     {
+-      int i = __opiegetutmpentry(ttyname(0), &utmp);
++      int i;
++      char *tmp = ttyname(0);
++      if (tmp == (char *) 0)
++	tmp = "UNKNOWN";
++
++      i = __opiegetutmpentry(tmp, &utmp);
+       endutent();
+       if (!i && utmp.ut_host[0]) {
+ 	char host[sizeof(utmp.ut_host) + 1];
