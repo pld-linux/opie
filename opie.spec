@@ -6,13 +6,6 @@ Release:	1
 Epoch:		1
 License:	NRL/TIN
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
 #BuildRequires:	autoconf
@@ -44,13 +37,6 @@ nie s╠ aktualnie szeroko rozpowszechnione.
 Summary:	Libraries and headers for developing OPIE enabled programs
 Summary(pl):	Biblioteki i nagЁСwki konieczne do tworzenia programСw z obsЁug╠ OPIE
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -63,13 +49,6 @@ Biblioteki i nagЁСwki konieczne do tworzenia programСw z obsЁug╠ OPIE.
 Summary:	OPIE static libraries
 Summary(pl):	Statyczne biblioteki OPIE
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
