@@ -88,7 +88,7 @@ Statyczne biblioteki OPIE.
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
-%{__make} DEBUG="%{rpmcflags}" \
+%{__make} DEBUG="%{rpmcflags} -fPIC" \
 	KEY_FILE=%{_sysconfdir}/opie/keys
 
 %install
