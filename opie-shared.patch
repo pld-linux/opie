@@ -1,0 +1,63 @@
+diff -ur opie-2.32.orig/Makefile.in opie-2.32/Makefile.in
+--- opie-2.32.orig/Makefile.in	Fri Jan  2 00:53:24 1998
++++ opie-2.32/Makefile.in	Tue Apr 25 04:40:53 2000
+@@ -128,7 +128,7 @@
+ ifdefs:	
+ 	egrep '^#*if*def' *.c *.h | cut -f2 -d: | sort | uniq
+ 
+-client: libopie/libopie.a libmissing/libmissing.a opietest-passed opiekey opiegen
++client: libopie/libopie.a libopie/libopie.so libmissing/libmissing.a opietest-passed opiekey opiegen
+ 
+ client-install: client
+ 	@echo "Installing OPIE client software..."
+@@ -146,7 +146,7 @@
+ 	@-for i in otp-md4 otp-md5; do ln -s opiekey.1 $(LOCALMAN)/man1/$$i.1; done
+ 	@if test ! -d $(LOCALMAN)/man1; then $(MKDIR) $(LOCALMAN)/man1; chmod 755 $(LOCALMAN)/man1; fi; cp opiekey.1 $(LOCALMAN)/man1/opiekey.1; $(CHOWN) $(OWNER) $(LOCALMAN)/man1/opiekey.1; chgrp $(GROUP) $(LOCALMAN)/man1/opiekey.1; chmod 644 $(LOCALMAN)/man1/opiekey.1
+ 
+-server:	libopie/libopie.a libmissing/libmissing.a opietest-passed opielogin opiesu opiepasswd opieinfo opieftpd opieserv
++server:	libopie/libopie.a libopie/libopie.so libmissing/libmissing.a opietest-passed opielogin opiesu opiepasswd opieinfo opieftpd opieserv
+ 
+ server-install: server
+ 	@echo "Installing OPIE server software..."
+@@ -220,10 +220,13 @@
+ 	@echo "Please verify by hand that this process worked."
+ 
+ opietest-passed:	opietest
+-	-./opietest && touch opietest-passed
++	-LD_PRELOAD=libopie/libopie.so ./opietest && touch opietest-passed
+ 
+ libopie/libopie.a: libopie/*.c *.h
+ 	(cd libopie ; $(MAKE) libopie.a CFL='$(CFLAGS) -DKEY_FILE=\"$(KEY_FILE)\"')
++
++libopie/libopie.so: libopie/*.c *.h
++	(cd libopie ; $(MAKE) libopie.so CFL='$(CFLAGS) -DKEY_FILE=\"$(KEY_FILE)\"')
+ 
+ libmissing/libmissing.a: libmissing/*.c
+ 	(cd libmissing ; $(MAKE) libmissing.a CFL='$(CFLAGS)')
+diff -ur opie-2.32.orig/libopie/Makefile.in opie-2.32/libopie/Makefile.in
+--- opie-2.32.orig/libopie/Makefile.in	Fri Jan  2 00:53:49 1998
++++ opie-2.32/libopie/Makefile.in	Tue Apr 25 04:38:23 2000
+@@ -15,14 +15,21 @@
+ OBJS=md4c.o md5c.o atob8.o btoa8.o btoh.o challenge.o getsequence.o hash.o hashlen.o keycrunch.o lock.o lookup.o newseed.o parsechallenge.o passcheck.o passwd.o randomchallenge.o readpass.o unlock.o verify.o version.o btoe.o accessfile.o generator.o insecure.o getutmpentry.o readrec.o writerec.o login.o open.o logwtmp.o # sha.o
+ 
+ CC=@CC@
+-CFLAGS=$(CFL) -I..
++CFLAGS=$(CFL) -I.. -fPIC -DPIC
+ TARGET=libopie.a
++TARGETS=libopie.so
++MAJOR=2
++MINOR=32
+ 
+-all: $(TARGET)
++all: $(TARGET) $(TARGETS)
+ 
+ $(TARGET): $(OBJS)
+ 	ar r $(TARGET) $(OBJS)
+ 	@RANLIB@ $(TARGET)
++
++$(TARGETS): $(OBJS)
++	ld -o $(TARGETS).$(MAJOR).$(MINOR) -soname $(TARGETS).$(MAJOR) -shared $(OBJS)
++	ln -s $(TARGETS).$(MAJOR).$(MINOR) $(TARGETS)
+ 
+ clean:
+ 	-rm -f $(OBJS) $(TARGET)
