@@ -13,7 +13,7 @@ Patch1:		%{name}-ttyname.patch
 Patch2:		%{name}-bison.patch
 Patch3:		%{name}-acfix.patch
 Patch4:		%{name}-errno.patch
-URL:		http://inner.net/opie
+URL:		http://inner.net/opie/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
 Requires:	%{name}-libs = %{epoch}:%{version}
