@@ -1,0 +1,63 @@
+--- opie-2.4/configure.in.orig	Sat Jan 11 02:49:28 2003
++++ opie-2.4/configure.in	Sat Jan 11 02:50:55 2003
+@@ -284,7 +284,8 @@
+ 	then
+ 		result=yes
+ 		AC_DEFINE(HAVE_SUNOS_C2_SHADOW)
+-		LIBOBJS="$LIBOBJS getspnam.o endspent.o"
++		AC_LIBOBJ([getspnam])
++		AC_LIBOBJ([endspent])
+ 	else
+ 		result=no
+ 	fi
+@@ -511,7 +512,7 @@
+ AC_FUNC_MEMCMP
+ AC_FUNC_ALLOCA
+ AC_REPLACE_FUNCS(getusershell sigaddset sigemptyset strerror strncasecmp)
+-MISSING="$LIBOBJS $ALLOCA " ;
++MISSING="$LIB@&t@OBJS $ALLOCA " ;
+ 
+ dnl These should be simplified by a macro
+ AC_CHECK_FUNC(atexit,      AC_DEFINE(HAVE_ATEXIT),      MISSING="${MISSING}atexit.o "; AC_CHECK_FUNCS(on_exit))
+--- opie-2.4/configure.in.orig	Sat Jan 11 02:51:26 2003
++++ opie-2.4/configure.in	Sat Jan 11 02:54:07 2003
+@@ -515,26 +515,26 @@
+ MISSING="$LIB@&t@OBJS $ALLOCA " ;
+ 
+ dnl These should be simplified by a macro
+-AC_CHECK_FUNC(atexit,      AC_DEFINE(HAVE_ATEXIT),      MISSING="${MISSING}atexit.o "; AC_CHECK_FUNCS(on_exit))
++AC_CHECK_FUNC(atexit,      AC_DEFINE(HAVE_ATEXIT),      [MISSING="${MISSING}atexit.o "; AC_CHECK_FUNCS(on_exit)])
+ AC_CHECK_FUNC(endutent,    AC_DEFINE(HAVE_ENDUTENT),    MISSING="${MISSING}endutent.o ")
+ AC_CHECK_FUNC(initgroups,  AC_DEFINE(HAVE_INITGROUPS),  MISSING="${MISSING}initgroups.o ")
+ AC_CHECK_FUNC(memcmp,      AC_DEFINE(HAVE_MEMCMP),      MISSING="${MISSING}memcmp.o ")
+-AC_CHECK_FUNC(memcpy,      AC_DEFINE(HAVE_MEMCPY),      MISSING="${MISSING}memcpy.o "; AC_CHECK_FUNCS(bcopy))
+-AC_CHECK_FUNC(memset,      AC_DEFINE(HAVE_MEMSET),      MISSING="${MISSING}memset.o "; AC_CHECK_FUNCS(bzero))
+-AC_CHECK_FUNC(getcwd,      AC_DEFINE(HAVE_GETCWD),      MISSING="${MISSING}getcwd.o "; AC_CHECK_FUNCS(getwd))
++AC_CHECK_FUNC(memcpy,      AC_DEFINE(HAVE_MEMCPY),      [MISSING="${MISSING}memcpy.o "; AC_CHECK_FUNCS(bcopy)])
++AC_CHECK_FUNC(memset,      AC_DEFINE(HAVE_MEMSET),      [MISSING="${MISSING}memset.o "; AC_CHECK_FUNCS(bzero)])
++AC_CHECK_FUNC(getcwd,      AC_DEFINE(HAVE_GETCWD),      [MISSING="${MISSING}getcwd.o "; AC_CHECK_FUNCS(getwd)])
+ AC_CHECK_FUNC(getenv,      AC_DEFINE(HAVE_GETENV),      MISSING="${MISSING}env.o ")
+-AC_CHECK_FUNC(getutline,   AC_DEFINE(HAVE_GETUTLINE),   MISSING="${MISSING}getutline.o "; AC_CHECK_FUNCS(ttyslot))
+-AC_CHECK_FUNC(pututline,   AC_DEFINE(HAVE_PUTUTLINE),   MISSING="${MISSING}pututline.o "; AC_CHECK_FUNCS(ttyslot))
++AC_CHECK_FUNC(getutline,   AC_DEFINE(HAVE_GETUTLINE),   [MISSING="${MISSING}getutline.o "; AC_CHECK_FUNCS(ttyslot)])
++AC_CHECK_FUNC(pututline,   AC_DEFINE(HAVE_PUTUTLINE),   [MISSING="${MISSING}pututline.o "; AC_CHECK_FUNCS(ttyslot)])
+ AC_CHECK_FUNC(setenv,      AC_DEFINE(HAVE_SETENV),      MISSING="${MISSING}env.o ")
+-AC_CHECK_FUNC(setegid,     AC_DEFINE(HAVE_SETEGID),     MISSING="${MISSING}setegid.o "; AC_CHECK_FUNCS(setregid setresgid))
+-AC_CHECK_FUNC(seteuid,     AC_DEFINE(HAVE_SETEUID),     MISSING="${MISSING}seteuid.o "; AC_CHECK_FUNCS(setreuid setresuid))
++AC_CHECK_FUNC(setegid,     AC_DEFINE(HAVE_SETEGID),     [MISSING="${MISSING}setegid.o "; AC_CHECK_FUNCS(setregid setresgid)])
++AC_CHECK_FUNC(seteuid,     AC_DEFINE(HAVE_SETEUID),     [MISSING="${MISSING}seteuid.o "; AC_CHECK_FUNCS(setreuid setresuid)])
+ AC_CHECK_FUNC(setutent,    AC_DEFINE(HAVE_SETUTENT),    MISSING="${MISSING}setutent.o ")
+-AC_CHECK_FUNC(sigprocmask, AC_DEFINE(HAVE_SIGPROCMASK), MISSING="${MISSING}sigprocmask.o "; AC_CHECK_FUNCS(sigblock sigsetmask))
+-AC_CHECK_FUNC(strchr,      AC_DEFINE(HAVE_STRCHR),      MISSING="${MISSING}strchr.o "; AC_CHECK_FUNCS(index))
+-AC_CHECK_FUNC(strrchr,     AC_DEFINE(HAVE_STRRCHR),     MISSING="${MISSING}strrchr.o "; AC_CHECK_FUNCS(rindex))
++AC_CHECK_FUNC(sigprocmask, AC_DEFINE(HAVE_SIGPROCMASK), [MISSING="${MISSING}sigprocmask.o "; AC_CHECK_FUNCS(sigblock sigsetmask)])
++AC_CHECK_FUNC(strchr,      AC_DEFINE(HAVE_STRCHR),      [MISSING="${MISSING}strchr.o "; AC_CHECK_FUNCS(index)])
++AC_CHECK_FUNC(strrchr,     AC_DEFINE(HAVE_STRRCHR),     [MISSING="${MISSING}strrchr.o "; AC_CHECK_FUNCS(rindex)])
+ AC_CHECK_FUNC(strtoul,     AC_DEFINE(HAVE_STRTOUL),     MISSING="${MISSING}strtoul.o ")
+-AC_CHECK_FUNC(sysconf,     AC_DEFINE(HAVE_SYSCONF),     MISSING="${MISSING}sysconf.o "; AC_CHECK_FUNCS(getdtablesize))
+-AC_CHECK_FUNC(uname,       AC_DEFINE(HAVE_UNAME),       MISSING="${MISSING}uname.o "; AC_CHECK_FUNCS(gethostname))
++AC_CHECK_FUNC(sysconf,     AC_DEFINE(HAVE_SYSCONF),     [MISSING="${MISSING}sysconf.o "; AC_CHECK_FUNCS(getdtablesize)])
++AC_CHECK_FUNC(uname,       AC_DEFINE(HAVE_UNAME),       [MISSING="${MISSING}uname.o "; AC_CHECK_FUNCS(gethostname)])
+ AC_CHECK_FUNC(unsetenv,    AC_DEFINE(HAVE_UNSETENV),    MISSING="${MISSING}env.o ")
+ AC_SUBST(MISSING)
+ 

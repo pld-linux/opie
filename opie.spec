@@ -9,11 +9,11 @@ Group:		Applications/System
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-ttyname.patch
+Patch2:		%{name}-bison.patch
+Patch3:		%{name}-acfix.patch
 URL:		http://inner.net/opie
-#BuildRequires:	autoconf
-#BuildRequires:	automake
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
-BuildConflicts:	bison >= 1.875
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -76,9 +76,12 @@ Statyczne biblioteki OPIE.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
+%patch3 -p1
 
 %build
-%configure2_13 \
+%{__autoconf}
+%configure \
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
