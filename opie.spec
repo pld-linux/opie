@@ -3,16 +3,21 @@ Summary(pl):	Zestaw programÛw do OPIE
 Name:		opie
 Version:	2.4
 Release:	1
+Epoch:		1
 License:	NRL/TIN
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
 #BuildRequires:	autoconf
 #BuildRequires:	automake
-BuildRequires:	byacc
+BuildRequires:	bison
 URL:		http://inner.net/opie
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,30 +38,38 @@ Zestaw programÛw do OPIE.
 OPIE jest implementacj± One-Time Password (OTP) System - systemu hase≥
 jednorazowych. Powinien on byÊ odporny na popularne w Internecie ataki
 pasywne (zobacz RFC 1704). Jest on podatny na ataki s≥ownikowe, ktÛre
-nie s± szeroko aktualnie rozpowszechniony. 
+nie s± aktualnie szeroko rozpowszechnione.
 
 %package devel
 Summary:	Libraries and headers for developing OPIE enabled programs
 Summary(pl):	Biblioteki i nag≥Ûwki konieczne do tworzenia programÛw z obs≥ug± OPIE
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}
 
 %description devel
 Libraries and headers for developing OPIE enabled programs.
 
 %description -l pl devel
-Biblioteki i nag≥Ûwki konieczne do tworzenia programÛw z obs≥ug± OPIE
+Biblioteki i nag≥Ûwki konieczne do tworzenia programÛw z obs≥ug± OPIE.
 
 %package static
 Summary:	OPIE static libraries
 Summary(pl):	Statyczne biblioteki OPIE
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -89,11 +102,11 @@ install opie.h $RPM_BUILD_ROOT%{_includedir}/security
 
 gzip -9nf BUG-REPORT README COPYRIGHT.NRL License.TIN
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
