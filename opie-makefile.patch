@@ -1,6 +1,11 @@
 --- ./libopie/Makefile.in.orig	Wed Aug  8 23:39:35 2001
 +++ ./libopie/Makefile.in	Wed Aug  8 23:44:17 2001
-@@ -19,13 +19,25 @@
+@@ -16,16 +16,33 @@
+ 
+ OBJS=md4c.o md5c.o atob8.o btoa8.o btoh.o challenge.o getsequence.o hash.o hashlen.o keycrunch.o lock.o lookup.o newseed.o parsechallenge.o passcheck.o passwd.o randomchallenge.o readpass.o unlock.o verify.o version.o btoe.o accessfile.o generator.o insecure.o getutmpentry.o readrec.o writerec.o login.o open.o logwtmp.o # sha.o
+ 
++SOBJS=$(OBJS:.o=.pic.o)
++
  CC=@CC@
  CFLAGS=$(CFL) -I.. -I../libmissing
  TARGET=libopie.a
@@ -15,9 +20,12 @@
  	ar cr $(TARGET) $(OBJS)
  	@RANLIB@ $(TARGET)
  
-+$(TARGETS): $(OBJS)
-+	$(CC) -o $(TARGETS).$(MAJOR).$(MINOR) -Wl,-soname=$(TARGETS).$(MAJOR) -shared $(OBJS)
++$(TARGETS): $(SOBJS)
++	$(CC) -o $(TARGETS).$(MAJOR).$(MINOR) -Wl,-soname=$(TARGETS).$(MAJOR) -shared $(SOBJS)
 +	ln -s $(TARGETS).$(MAJOR).$(MINOR) $(TARGETS)
++
++%.pic.o: %.c
++	$(CC) -c $(CPPFLAGS) $(CFLAGS) -fPIC -o $@ $<
 +
 +install: $(TARGET) $(TARGETS)
 +	install $(TARGET) $(DESTDIR)$(LOCALLIB)

@@ -2,7 +2,7 @@ Summary:	OPIE suite of programs
 Summary(pl):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	4
+Release:	5
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
@@ -55,6 +55,7 @@ Summary:	Headers for developing OPIE enabled programs
 Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	FHS >= 2.2-9
 
 %description devel
 Headers for developing OPIE enabled programs.
@@ -88,11 +89,7 @@ Statyczne biblioteki OPIE.
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
-%ifarch alpha
-%{__make} DEBUG="%{rpmcflags} -fPIC" \
-%else
 %{__make} DEBUG="%{rpmcflags} " \
-%endif
 	KEY_FILE=%{_sysconfdir}/opie/keys
 
 %install
