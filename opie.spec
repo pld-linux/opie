@@ -60,7 +60,7 @@ autoconf
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
-%{__make} DEBUG="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" \
+%{__make} DEBUG="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}" \
 	KEY_FILE=%{_sysconfdir}/opie/keys
 
 %install
