@@ -1,11 +1,12 @@
 Summary:	OPIE suite of programs
 Name:		opie
 Version:	2.32
-Release:	3
+Release:	4
 License:	NRL/TIN
 Group:		Libraries
-Group(pl):	Biblioteki
+Group(de):	Libraries
 Group(fr):	Librairies
+Group(pl):	Biblioteki
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-install.patch
@@ -27,8 +28,9 @@ proper use of system audit software.
 %package devel
 Summary:	libraries and headers for developing OPIE enabled programs
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
@@ -37,8 +39,9 @@ Libraries and headers for developing OPIE enabled programs.
 %package static
 Summary:	OPIE staic libraries
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -52,25 +55,24 @@ OPIE staic libraries.
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
-%{__make} DEBUG="$RPM_OPT_FLAGS" KEY_FILE=%{_sysconfdir}/opie/keys
+%{__make} DEBUG="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" \
+	KEY_FILE=%{_sysconfdir}/opie/keys
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/opie,%{_sbindir},%{_libdir},%{_includedir}/security,/var/lib}
 
-%{__make} install KEY_FILE=%{_sysconfdir}/opie/keys DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	KEY_FILE=%{_sysconfdir}/opie/keys
 
 install opie.h $RPM_BUILD_ROOT%{_includedir}/security
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
-gzip -9nf $RPM_BUILD_ROOT/%{_mandir}/man{1,4,5,8}/* \
-	BUG-REPORT README COPYRIGHT.NRL License.TIN
+gzip -9nf BUG-REPORT README COPYRIGHT.NRL License.TIN
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
