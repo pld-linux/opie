@@ -11,6 +11,8 @@ Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-install.patch
 Patch2:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	byacc
 URL:		http://inner.net/opie
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -55,7 +57,9 @@ OPIE staic libraries.
 %patch2 -p1
 
 %build
-%configure2_13 \
+aclocal
+autoconf
+%configure \
 	--enable-access-file=%{_sysconfdir}/opie/access \
 	--enable-user-locking=/var/lib/opie
 
