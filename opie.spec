@@ -13,7 +13,7 @@ URL:		http://inner.net/opie
 #BuildRequires:	autoconf
 #BuildRequires:	automake
 BuildRequires:	bison
-BuildConflicts:	bison <= 1.875
+BuildConflicts:	bison >= 1.875
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
