@@ -6,7 +6,7 @@ Release:	9
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
-Source0:	http://inner.net/pub/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://inner.net/pub/opie/%{name}-%{version}.tar.gz
 # Source0-md5:	d46e0ff8cc721a287892192dc4e7b7e1
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-ttyname.patch
@@ -115,13 +115,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(0755,root,root) %{_bindir}/opieinfo
-%attr(0755,root,root) %{_bindir}/opiekey
-%attr(0755,root,root) %{_bindir}/otp-*
+%attr(755,root,root) %{_bindir}/opieinfo
+%attr(755,root,root) %{_bindir}/opiekey
+%attr(755,root,root) %{_bindir}/otp-*
 %attr(4755,root,root) %{_bindir}/opiepasswd
 %attr(4755,root,root) %{_sbindir}/opiesu
 %attr(4755,root,root) %{_sbindir}/opielogin
-%attr(0750,root,root) %{_sbindir}/opieftpd
+%attr(750,root,root) %{_sbindir}/opieftpd
 %dir %attr(700,root,root) /var/lib/opie
 %{_mandir}/man*/*
 
@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUG-REPORT README COPYRIGHT.NRL License.TIN
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_sysconfdir}/opie
-%config(noreplace) %verify(not size mtime md5) %attr(644,root,root) %{_sysconfdir}/opie/keys
+%config(noreplace) %verify(not md5 mtime size) %attr(644,root,root) %{_sysconfdir}/opie/keys
 
 %files devel
 %defattr(644,root,root,755)
