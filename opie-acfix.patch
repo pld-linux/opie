@@ -69,3 +69,24 @@
  AC_CHECK_FUNC(unsetenv,    AC_DEFINE(HAVE_UNSETENV),    MISSING="${MISSING}env.o ")
  AC_SUBST(MISSING)
  
+--- opie-2.4/configure.in.orig	2006-07-01 13:28:27.712912000 +0200
++++ opie-2.4/configure.in	2006-07-01 13:33:29.331762000 +0200
+@@ -549,7 +549,8 @@
+ #endif /* HAVE_UNISTD_H */
+ ],
+ [struct timeval tv;
+-gettimeofday(&tv, NULL)], AC_MSG_RESULT(no), AC_MSG_RESULT(maybe) AC_TRY_COMPILE([
++gettimeofday(&tv, NULL)], AC_MSG_RESULT(no), [AC_MSG_RESULT(maybe)
++AC_TRY_COMPILE([
+ #if HAVE_SYS_TIME_H
+ #include <sys/time.h>
+ #endif /* HAVE_SYS_TIME_H */
+@@ -558,7 +559,7 @@
+ #endif /* HAVE_UNISTD_H */
+ ],
+ [struct timeval tv;
+-gettimeofday(&tv)], AC_DEFINE(HAVE_ONE_ARG_GETTIMEOFDAY) AC_MSG_RESULT(yes), AC_MSG_RESULT(no)))
++gettimeofday(&tv)], AC_DEFINE(HAVE_ONE_ARG_GETTIMEOFDAY) AC_MSG_RESULT(yes), AC_MSG_RESULT(no))])
+ 
+ # Munge out LOCALBIN and LOCALMAN in canonical (no bletch) form
+ AC_OUTPUT(configure.munger libmissing/Makefile libopie/Makefile Makefile.munge:Makefile.in)
