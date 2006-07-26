@@ -130,7 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc BUG-REPORT README COPYRIGHT.NRL License.TIN
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_sysconfdir}/opie
-%config(noreplace) %verify(not md5 mtime size) %attr(644,root,root) %{_sysconfdir}/opie/keys
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/opie/keys
 
 %files devel
 %defattr(644,root,root,755)
