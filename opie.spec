@@ -2,7 +2,7 @@ Summary:	OPIE suite of programs
 Summary(pl):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	10
+Release:	11
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
@@ -57,7 +57,7 @@ Summary:	Headers for developing OPIE enabled programs
 Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}
-Requires:	FHS >= 2.2-9
+Requires:	filesystem >= 3.0-11
 
 %description devel
 Headers for developing OPIE enabled programs.
