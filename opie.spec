@@ -57,7 +57,7 @@ Summary:	Headers for developing OPIE enabled programs
 Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}
-Requires:	filesystem >= 3.0-11
+Requires:	filesystem >= 2.0-1
 
 %description devel
 Headers for developing OPIE enabled programs.
