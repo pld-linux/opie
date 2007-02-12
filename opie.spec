@@ -1,5 +1,5 @@
 Summary:	OPIE suite of programs
-Summary(pl):	Zestaw programów do OPIE
+Summary(pl.UTF-8):   Zestaw programÃ³w do OPIE
 Name:		opie
 Version:	2.4
 Release:	11
@@ -32,29 +32,29 @@ details). The system is vulnerable to active dictionary attacks,
 though these are not widespread at present and can be detected through
 proper use of system audit software.
 
-%description -l pl
-Zestaw programów do OPIE.
+%description -l pl.UTF-8
+Zestaw programÃ³w do OPIE.
 
-OPIE jest implementacj± One-Time Password (OTP) System - systemu hase³
-jednorazowych. Powinien on byæ odporny na popularne w Internecie ataki
-pasywne (zobacz RFC 1704). Jest on podatny na ataki s³ownikowe, które
-nie s± aktualnie szeroko rozpowszechnione.
+OPIE jest implementacjÄ… One-Time Password (OTP) System - systemu haseÅ‚
+jednorazowych. Powinien on byÄ‡ odporny na popularne w Internecie ataki
+pasywne (zobacz RFC 1704). Jest on podatny na ataki sÅ‚ownikowe, ktÃ³re
+nie sÄ… aktualnie szeroko rozpowszechnione.
 
 %package libs
 Summary:	OPIE shared libraries
-Summary(pl):	Biblioteki wspó³dzielone OPIE
+Summary(pl.UTF-8):   Biblioteki wspÃ³Å‚dzielone OPIE
 Group:		Libraries
 Conflicts:	%{name} < 2.4-2
 
 %description libs
 OPIE (One-Time Password System) shared libraries.
 
-%description libs -l pl
-Biblioteki wspó³dzielone OPIE (systemu hase³ jednorazowych).
+%description libs -l pl.UTF-8
+Biblioteki wspÃ³Å‚dzielone OPIE (systemu haseÅ‚ jednorazowych).
 
 %package devel
 Summary:	Headers for developing OPIE enabled programs
-Summary(pl):	Nag³ówki do tworzenia programów z obs³ug± OPIE
+Summary(pl.UTF-8):   NagÅ‚Ã³wki do tworzenia programÃ³w z obsÅ‚ugÄ… OPIE
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}
 Requires:	filesystem >= 3.0-11
@@ -62,19 +62,19 @@ Requires:	filesystem >= 3.0-11
 %description devel
 Headers for developing OPIE enabled programs.
 
-%description devel -l pl
-Pliki nag³ówkowe potrzebne do tworzenia programów z obs³ug± OPIE.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe potrzebne do tworzenia programÃ³w z obsÅ‚ugÄ… OPIE.
 
 %package static
 Summary:	OPIE static libraries
-Summary(pl):	Statyczne biblioteki OPIE
+Summary(pl.UTF-8):   Statyczne biblioteki OPIE
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 OPIE staic libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki OPIE.
 
 %prep
