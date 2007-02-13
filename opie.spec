@@ -1,5 +1,5 @@
 Summary:	OPIE suite of programs
-Summary(pl.UTF-8):   Zestaw programów do OPIE
+Summary(pl.UTF-8):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
 Release:	11
@@ -42,7 +42,7 @@ nie są aktualnie szeroko rozpowszechnione.
 
 %package libs
 Summary:	OPIE shared libraries
-Summary(pl.UTF-8):   Biblioteki współdzielone OPIE
+Summary(pl.UTF-8):	Biblioteki współdzielone OPIE
 Group:		Libraries
 Conflicts:	%{name} < 2.4-2
 
@@ -54,7 +54,7 @@ Biblioteki współdzielone OPIE (systemu haseł jednorazowych).
 
 %package devel
 Summary:	Headers for developing OPIE enabled programs
-Summary(pl.UTF-8):   Nagłówki do tworzenia programów z obsługą OPIE
+Summary(pl.UTF-8):	Nagłówki do tworzenia programów z obsługą OPIE
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}
 Requires:	filesystem >= 3.0-11
@@ -67,7 +67,7 @@ Pliki nagłówkowe potrzebne do tworzenia programów z obsługą OPIE.
 
 %package static
 Summary:	OPIE static libraries
-Summary(pl.UTF-8):   Statyczne biblioteki OPIE
+Summary(pl.UTF-8):	Statyczne biblioteki OPIE
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}
 
