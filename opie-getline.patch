@@ -1,0 +1,45 @@
+diff -Nur opie-2.4.orig/ftpcmd.y opie-2.4/ftpcmd.y
+--- opie-2.4.orig/ftpcmd.y	2009-08-27 15:22:38.000000000 +0200
++++ opie-2.4/ftpcmd.y	2009-08-27 16:49:54.000000000 +0200
+@@ -875,9 +875,9 @@
+ #include <arpa/telnet.h>
+ 
+ /*
+- * getline - a hacked up version of fgets to ignore TELNET escape codes.
++ * telnet_getline - a hacked up version of fgets to ignore TELNET escape codes.
+  */
+-char *getline FUNCTION((s, n, iop), char *s AND int n AND FILE *iop)
++char *telnet_getline FUNCTION((s, n, iop), char *s AND int n AND FILE *iop)
+ {
+ 	register c;
+ 	register char *cs;
+@@ -958,7 +958,7 @@
+ 		case CMD:
+ 			(void) signal(SIGALRM, toolong);
+ 			(void) alarm((unsigned) timeout);
+-			if (getline(cbuf, sizeof(cbuf)-1, stdin) == NULL) {
++			if (telnet_getline(cbuf, sizeof(cbuf)-1, stdin) == NULL) {
+ 				reply(221, "You could at least say goodbye.");
+ 				dologout(0);
+ 			}
+diff -Nur opie-2.4.orig/opieftpd.c opie-2.4/opieftpd.c
+--- opie-2.4.orig/opieftpd.c	2000-07-16 18:44:09.000000000 +0200
++++ opie-2.4/opieftpd.c	2009-08-27 16:50:13.000000000 +0200
+@@ -229,7 +229,7 @@
+ 
+ VOIDRET perror_reply __P((int, char *));
+ VOIDRET dologout __P((int));
+-char *getline __P((char *, int, FILE *));
++char *telnet_getline __P((char *, int, FILE *));
+ VOIDRET upper __P((char *));
+ 
+ static VOIDRET lostconn __P((int));
+@@ -1290,7 +1290,7 @@
+   if (!transflag)
+     return;
+   cp = tmpline;
+-  if (getline(cp, 7, stdin) == NULL) {
++  if (telnet_getline(cp, 7, stdin) == NULL) {
+     reply(221, "You could at least say goodbye.");
+     dologout(0);
+   }

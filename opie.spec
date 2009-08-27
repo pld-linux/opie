@@ -15,6 +15,7 @@ Patch3:		%{name}-acfix.patch
 Patch4:		%{name}-errno.patch
 Patch5:		%{name}-suse.patch
 Patch6:		%{name}-uint4.patch
+Patch7:		%{name}-getline.patch
 URL:		http://inner.net/opie
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
@@ -86,6 +87,7 @@ Statyczne biblioteki OPIE.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p0
+%patch7 -p1
 
 %build
 %{__autoconf}
