@@ -2,7 +2,7 @@ Summary:	OPIE suite of programs
 Summary(pl.UTF-8):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	12
+Release:	13
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
@@ -16,6 +16,7 @@ Patch4:		%{name}-errno.patch
 Patch5:		%{name}-suse.patch
 Patch6:		%{name}-uint4.patch
 Patch7:		%{name}-getline.patch
+Patch8:		format-security.patch
 URL:		http://inner.net/opie
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	bison
@@ -88,6 +89,7 @@ Statyczne biblioteki OPIE.
 %patch5 -p1
 %patch6 -p0
 %patch7 -p1
+%patch8 -p1
 
 %build
 %{__autoconf}
@@ -108,6 +110,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/opie,%{_sbindir},%{_libdir},%{_include
 	KEY_FILE=%{_sysconfdir}/opie/keys
 
 install opie.h $RPM_BUILD_ROOT%{_includedir}/security
+ln -sf libopie.so.2.4 $RPM_BUILD_ROOT%{_libdir}/libopie.so.2
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -131,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc BUG-REPORT README COPYRIGHT.NRL License.TIN
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/lib*.so.2
 %dir %{_sysconfdir}/opie
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/opie/keys
 
