@@ -1,0 +1,11 @@
+--- opie-2.4/opielogin.c.orig	2014-01-13 18:29:18.466354003 +0100
++++ opie-2.4/opielogin.c	2014-01-13 18:30:05.887087343 +0100
+@@ -300,7 +300,7 @@ static VOIDRET getloginname FUNCTION_NOA
+ 	flags = 4;
+ 	first--;
+       } else
+-	printf(ttyprompt);
++	fputs(ttyprompt, stdout);
+     } else
+       printf("login: ");
+     fflush(stdout);
