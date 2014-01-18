@@ -122,27 +122,40 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/opieinfo
 %attr(755,root,root) %{_bindir}/opiekey
-%attr(755,root,root) %{_bindir}/otp-*
+%attr(755,root,root) %{_bindir}/otp-md4
+%attr(755,root,root) %{_bindir}/otp-md5
 %attr(4755,root,root) %{_bindir}/opiepasswd
 %attr(4755,root,root) %{_sbindir}/opiesu
 %attr(4755,root,root) %{_sbindir}/opielogin
 %attr(750,root,root) %{_sbindir}/opieftpd
 %dir %attr(700,root,root) /var/lib/opie
-%{_mandir}/man*/*
+%{_mandir}/man1/opiegen.1*
+%{_mandir}/man1/opieinfo.1*
+%{_mandir}/man1/opiekey.1*
+%{_mandir}/man1/opielogin.1*
+%{_mandir}/man1/opiepasswd.1*
+%{_mandir}/man1/opieserv.1*
+%{_mandir}/man1/opiesu.1*
+%{_mandir}/man1/otp-md4.1*
+%{_mandir}/man1/otp-md5.1*
+%{_mandir}/man4/opie.4*
+%{_mandir}/man5/opieaccess.5*
+%{_mandir}/man8/opieftpd.8*
 
 %files libs
 %defattr(644,root,root,755)
 %doc BUG-REPORT README COPYRIGHT.NRL License.TIN
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.2
+%attr(755,root,root) %{_libdir}/libopie.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libopie.so.2
 %dir %{_sysconfdir}/opie
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/opie/keys
+%{_mandir}/man5/opiekeys.5*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libopie.so
 %{_includedir}/security/opie.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libopie.a
