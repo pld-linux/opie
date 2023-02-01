@@ -2,7 +2,7 @@ Summary:	OPIE suite of programs
 Summary(pl.UTF-8):	Zestaw programów do OPIE
 Name:		opie
 Version:	2.4
-Release:	13
+Release:	14
 Epoch:		1
 License:	NRL/TIN
 Group:		Applications/System
