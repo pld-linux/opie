@@ -1,6 +1,7 @@
---- opie-2.4/libopie/readpass.c
-+++ opie-2.4/libopie/readpass.c
-@@ -14,6 +14,8 @@
+diff -urNp -x '*.orig' opie-2.4.org/libopie/readpass.c opie-2.4/libopie/readpass.c
+--- opie-2.4.org/libopie/readpass.c	1999-03-11 03:09:57.000000000 +0100
++++ opie-2.4/libopie/readpass.c	2023-02-02 08:53:56.749480066 +0100
+@@ -14,6 +14,8 @@ License Agreement applies to this softwa
  
          History:
  
@@ -9,7 +10,7 @@
  	Modified by cmetz for OPIE 2.31. Use usleep() to delay after setting
  		the terminal attributes; this might help certain buggy
  		systems.
-@@ -81,6 +83,9 @@
+@@ -81,6 +83,9 @@ char *opiereadpass FUNCTION((buf, len, f
    char kill[4];
    char eof[4];
  
@@ -19,7 +20,7 @@
    memset(erase, 0, sizeof(erase));
    memset(kill, 0, sizeof(kill));
    memset(eof, 0, sizeof(eof));
-@@ -217,7 +222,8 @@
+@@ -217,7 +222,8 @@ char *opiereadpass FUNCTION((buf, len, f
  #endif /* unix */
  
    {
@@ -29,9 +30,10 @@
  #ifdef __OS2__
    KBDKEYINFO keyInfo;
  #endif /* __OS2__ */
---- opie-2.4/libopie/readrec.c
-+++ opie-2.4/libopie/readrec.c
-@@ -8,6 +8,7 @@
+diff -urNp -x '*.orig' opie-2.4.org/libopie/readrec.c opie-2.4/libopie/readrec.c
+--- opie-2.4.org/libopie/readrec.c	2001-01-19 12:11:09.000000000 +0100
++++ opie-2.4/libopie/readrec.c	2023-02-02 08:53:56.749480066 +0100
+@@ -8,6 +8,7 @@ you didn't get a copy, you may request o
  
  	History:
  
@@ -39,7 +41,7 @@
  	Modified by cmetz for OPIE 2.4. Check that seed, sequence number, and
  		response values are valid.
  	Modified by cmetz for OPIE 2.31. Removed active attack protection
-@@ -142,7 +143,7 @@
+@@ -142,7 +143,7 @@ int __opiereadrec FUNCTION((opie), struc
      if (strlen(opie->opie_principal) > OPIE_PRINCIPAL_MAX)
        (opie->opie_principal)[OPIE_PRINCIPAL_MAX] = 0;
      
@@ -48,19 +50,21 @@
      
      do {
        if ((opie->opie_recstart = ftell(f)) < 0)
---- opie-2.4/opieinfo.c
-+++ opie-2.4/opieinfo.c
-@@ -33,6 +33,7 @@
- 
+diff -urNp -x '*.orig' opie-2.4.org/opieinfo.c opie-2.4/opieinfo.c
+--- opie-2.4.org/opieinfo.c	2023-02-02 08:53:56.696146411 +0100
++++ opie-2.4/opieinfo.c	2023-02-02 08:53:56.749480066 +0100
+@@ -34,6 +34,7 @@ License Agreement applies to this softwa
  #include "opie_cfg.h"
+ #include <errno.h>
  #include <stdio.h>
 +#include <errno.h>
  #if HAVE_UNISTD_H
  #include <unistd.h>
  #endif /* HAVE_UNISTD_H */
---- opie-2.4/opiepasswd.c
-+++ opie-2.4/opiepasswd.c
-@@ -14,6 +14,8 @@
+diff -urNp -x '*.orig' opie-2.4.org/opiepasswd.c opie-2.4/opiepasswd.c
+--- opie-2.4.org/opiepasswd.c	1999-03-11 03:09:53.000000000 +0100
++++ opie-2.4/opiepasswd.c	2023-02-02 08:53:56.749480066 +0100
+@@ -14,6 +14,8 @@ License Agreement applies to this softwa
  
  	History:
  
@@ -69,7 +73,7 @@
  	Modified by cmetz for OPIE 2.4. Use struct opie_key for key blocks.
  		Use opiestrncpy().
  	Modified by cmetz for OPIE 2.32. Use OPIE_SEED_MAX instead of
-@@ -207,7 +209,7 @@
+@@ -207,7 +209,7 @@ int main FUNCTION((argc, argv), int argc
      }
    } else {
      if (!rval)
@@ -78,9 +82,10 @@
  
      if (opienewseed(seed) < 0) {
        fprintf(stderr, "Error updating seed.\n");
---- opie-2.4/opiesu.c
-+++ opie-2.4/opiesu.c
-@@ -201,7 +201,7 @@
+diff -urNp -x '*.orig' opie-2.4.org/opiesu.c opie-2.4/opiesu.c
+--- opie-2.4.org/opiesu.c	1999-03-11 03:09:53.000000000 +0100
++++ opie-2.4/opiesu.c	2023-02-02 08:53:56.749480066 +0100
+@@ -201,7 +201,7 @@ static VOIDRET lsetenv FUNCTION((ename,
      for (cp = ename; *cp == *dp && *cp; cp++, dp++)
        continue;
      if (*cp == 0 && (*dp == '=' || *dp == 0)) {
@@ -89,7 +94,7 @@
        *--ep = buf;
        return;
      }
-@@ -469,8 +469,8 @@
+@@ -469,8 +469,8 @@ ok:
    }
    if (thisuser.pw_shell && *thisuser.pw_shell)
      shell = thisuser.pw_shell;
